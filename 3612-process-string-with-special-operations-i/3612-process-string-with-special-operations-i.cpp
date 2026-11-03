@@ -6,10 +6,7 @@ public:
         if (ch == '*') {
           if (!res.empty()) res.pop_back();
         }
-        else if (ch == '#') {
-          string temp = res;
-          for (char c : temp) res += c;
-        } 
+        else if (ch == '#') res += res;
         else if (ch == '%') reverse(res.begin(), res.end());
         else res += ch;
       }
