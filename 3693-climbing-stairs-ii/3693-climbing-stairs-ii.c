@@ -1,15 +1,14 @@
-int min(int a, int b) {
-  if (a <= b) return a;
-  else return b;
-}
-
 int climbStairs(int n, int* costs, int costsSize) {
-  int dp[100100] = {};
-  for (int i = 1; i <= n; i++) dp[i] = INT_MAX;
-  for (int i = 1; i <= n; i++) {
-    for (int k = 1; k <= 3; k++) {
-      if (i >= k) dp[i] = min(dp[i], dp[i - k] + costs[i - 1] + k * k);
-    }
+  int f0 = 0, f1 = 0, f2 = 0;
+  for (int i = 0; i < n; i++) {
+    int c = costs[i];
+    int mn = f0 + 9;
+    if (f1 + 4 < mn) mn = f1 + 4;
+    if (f2 + 1 < mn) mn = f2 + 1;
+    int next = mn + c;
+    f0 = f1;
+    f1 = f2;
+    f2 = next;
   }
-  return dp[n];
+  return f2;
 }
