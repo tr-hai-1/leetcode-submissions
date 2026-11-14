@@ -6,7 +6,7 @@ private:
     if (board[r][c] != word[k]) return 0;
     if (k == (int)word.size() - 1) return 1;
     char saved = board[r][c];
-    board[r][c] = '#';
+    board[r][c] = '.';
     bool found = (dfs(board, word, r - 1, c, k + 1) || dfs(board, word, r + 1, c, k + 1) || dfs(board, word, r, c - 1, k + 1) || dfs(board, word, r, c + 1, k + 1));
     board[r][c] = saved;
     return found;
@@ -19,7 +19,7 @@ public:
         for (int c = 0; c < n; c++) {
           if (dfs(board, word, r, c, 0)) return 1;
         }
-      }
+      }   
       return 0;
     }
 };
