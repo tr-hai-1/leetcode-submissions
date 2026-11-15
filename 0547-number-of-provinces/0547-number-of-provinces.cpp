@@ -1,6 +1,6 @@
 class Solution {
 private:
-  void dfs(int city, vector<vector<int>>& isConnected, set<int>& seen) {
+  void dfs(int city, vector<vector<int>>& isConnected, unordered_set<int>& seen) {
     seen.insert(city);
     for (int curr = 0; curr < (int)isConnected[city].size(); curr++) {
       int connected = isConnected[city][curr];
@@ -11,7 +11,7 @@ private:
   }
 public:
     int findCircleNum(vector<vector<int>>& isConnected) {
-      set<int> seen;
+      unordered_set<int> seen;
       int res = 0;
       for (int city = 0; city < (int)isConnected.size(); city++) {
         if (seen.find(city) == seen.end()) {
