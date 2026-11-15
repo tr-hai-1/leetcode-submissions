@@ -1,4 +1,14 @@
 class Solution {
+private:
+  void dfs(int city, vector<vector<int>>& isConnected, set<int>& seen) {
+    seen.insert(city);
+    for (int curr = 0; curr < (int)isConnected[city].size(); curr++) {
+      int connected = isConnected[city][curr];
+      if (connected && seen.find(curr) == seen.end())
+        dfs(curr, isConnected, seen);
+    }
+    return;
+  }
 public:
     int findCircleNum(vector<vector<int>>& isConnected) {
       set<int> seen;
@@ -11,13 +21,4 @@ public:
       }
       return res;
     }
-private:
-  void dfs(int city, vector<vector<int>>& isConnected, set<int>& seen) {
-    seen.insert(city);
-    for (int curr = 0; curr < (int)isConnected[city].size(); curr++) {
-      int connected = isConnected[city][curr];
-      if (connected && seen.find(curr) == seen.end()) dfs(curr, isConnected, seen);
-    }
-    return;
-  }
 };
