@@ -1,31 +1,24 @@
 class Solution {
-public:
-    bool dfs(int cur, int destination, vector<vector<int>>& graph, vector<bool>& visited) {
-        visited[cur] = true;
-        if (cur == destination)
-            return true;
-        int v = graph[cur].size();
-        for (int i = 0; i < v; i++) {
-            if (visited[graph[cur][i]])
-                continue;
-            if (dfs(graph[cur][i], destination, graph, visited))
-                return true;
-        }
-        return false;
+private:
+  bool dfs(vector<vector<int>>& graph, vector<bool>& vis, int curr, int destination) {
+    vis[curr] = 1;
+    if (curr == destination) return 1;
+    for (int v : graph[curr]) {
+      if (vis[v]) continue;
+      if (dfs(graph, vis, v, destination)) return 1;
     }
+    return 0;
+  }
+public:
     bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
-        int e = edges.size();
-        vector<vector<int>> graph(n);
-        for (int i = 0; i < e; i++) {
-            int a = edges[i][0];
-            int b = edges[i][1];
-            graph[a].push_back(b);
-            graph[b].push_back(a);
-        }
-        vector<bool> visited(n, false);
-        if (dfs(source, destination, graph, visited))
-            return true;
-        else
-            return false;
+      vector<vector<int>> graph(n);
+      for (auto edge : edges) {
+        int u = edge[0], v = edge[1];
+        graph[u].push_back(v);
+        graph[v].push_back(u);
+      }   
+      vector<bool> vis(n);
+      if (dfs(graph, vis, source, destination)) return 1;
+      return 0;
     }
 };
